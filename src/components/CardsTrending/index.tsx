@@ -60,7 +60,7 @@ export default function CardsTrending() {
           {CardsTrendingList.map((x, _) => {
             return (
               <Card
-                className="relative w-fit max-w-[369px] h-card-trending rounded-xl shadow-sm mr-[1.2rem]"
+                className="relative w-fit max-w-[369px] h-card-trending rounded-xl shadow-sm mr-0 md:mr-[1.2rem]"
                 key={x.id}
               >
                 <S.CardOverlay />

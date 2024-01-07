@@ -7,14 +7,14 @@ type UserProps = {
 type TagsProps = {
   id: string
   name: string
-  link: string
+  slug: string
 }
 
 export type PostsListProps = {
   id: string
-  link: string
+  slug: string
   title: string
-  tabsCoins: number
+  tabcoins: number
   views: number
   comments: number
   createdAt: number

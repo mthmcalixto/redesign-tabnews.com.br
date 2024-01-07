@@ -28,7 +28,7 @@ export default function CardsTrending() {
     768: {
       slidesPerView: 3,
     },
-    1024: {
+    1200: {
       slidesPerView: 4,
     },
   }

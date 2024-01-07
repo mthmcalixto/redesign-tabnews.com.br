@@ -33,10 +33,10 @@ export default async function Posts() {
                 <div className="flex gap-9 items-center justify-start">
                   <span className="text-2xl">{i + 1}.</span>
                   <div className="flex gap-3 justify-between w-full flex-col md:flex-row">
-                    <div className="flex flex-col gap-5 w-full md:w-1/2">
+                    <div className="flex flex-col gap-5 w-full md:w-1/2 justify-start">
                       <div className="w-fit">
                         <Link
-                          className="grid md:truncate break-words text-xl font-medium text-ellipsis overflow-hidden hover:opacity-45"
+                          className="grid md:truncate break-words text-xl font-medium text-ellipsis overflow-hidden hover:opacity-45 visited:text-zinc-400"
                           href={`https://www.tabnews.com.br/${x.user.username}/${x.slug}`}
                           target="_blank"
                           passHref

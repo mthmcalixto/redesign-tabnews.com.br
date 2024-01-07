@@ -5,13 +5,13 @@ export function formatNumber(number: number): string {
   const thousand = 1e3
 
   if (number >= trillion) {
-    return (number / trillion).toFixed(2) + 'T'
+    return (number / trillion).toFixed(1) + 'T'
   } else if (number >= billion) {
-    return (number / billion).toFixed(2) + 'B'
+    return (number / billion).toFixed(1) + 'B'
   } else if (number >= million) {
-    return (number / million).toFixed(2) + 'M'
+    return (number / million).toFixed(1) + 'M'
   } else if (number >= thousand) {
-    return (number / thousand).toFixed(2) + 'K'
+    return (number / thousand).toFixed(1) + 'K'
   } else {
     return number.toString()
   }

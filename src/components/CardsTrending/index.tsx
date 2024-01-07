@@ -18,6 +18,21 @@ export default function CardsTrending() {
     'isBeginning' | 'isEnd' | null
   >('isBeginning')
 
+  const breakPoints = {
+    300: {
+      slidesPerView: 1,
+    },
+    640: {
+      slidesPerView: 2,
+    },
+    768: {
+      slidesPerView: 3,
+    },
+    1024: {
+      slidesPerView: 4,
+    },
+  }
+
   return (
     <div>
       <S.Title>Trending</S.Title>
@@ -26,6 +41,7 @@ export default function CardsTrending() {
           className="w-full min-w-0"
           modules={[Navigation]}
           slidesPerView={4}
+          breakpoints={breakPoints}
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper
           }}

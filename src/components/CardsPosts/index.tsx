@@ -1,5 +1,5 @@
 import { PostsList } from '@/data/dataPosts'
-import { formatNumber } from '@/utils/formartValue'
+import { formatNumber } from '@/utils/formatNumber'
 import { formatCreatedAt } from '@/utils/postFormart'
 import { Button } from '@TabNewsUI'
 import { IoChatboxOutline } from 'react-icons/io5'
@@ -28,15 +28,15 @@ export default function Posts() {
               <S.ShadowCard key={x.id}>
                 <div className="flex gap-9 items-center justify-center">
                   <span className="text-2xl">{x.id}.</span>
-                  <div className="flex gap-3 justify-between w-full">
-                    <div className="flex flex-col gap-5 w-1/2">
+                  <div className="flex gap-3 justify-between w-full flex-col md:flex-row">
+                    <div className="flex flex-col gap-5 w-full md:w-1/2">
                       <h2
-                        className="truncate text-xl font-medium text-ellipsis overflow-hidden"
+                        className="md:truncate break-words text-xl font-medium text-ellipsis overflow-hidden"
                         title={x.title}
                       >
                         {x.title}
                       </h2>
-                      <ul className="flex gap-5 items-center">
+                      <ul className="flex gap-5 items-center flex-wrap md:flex-row">
                         <S.Tabcoins>
                           <S.BlueCircle />
                           {x.tabsCoins} tabcoins
@@ -68,7 +68,7 @@ export default function Posts() {
                       </ul>
                     </div>
                     <S.TagsContainer>
-                      <ul className="flex gap-2">
+                      <ul className="flex gap-2 flex-wrap md:flex-row">
                         {x.tags.map((x, _) => {
                           return (
                             <Button $intent="tabs" key={x.id}>

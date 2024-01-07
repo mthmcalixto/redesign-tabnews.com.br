@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <S.Footer>
       <S.Container>
-        <S.Border></S.Border>
+        <S.Border />
         <S.FlexContainer>
           <S.LogoContainer>
             <span>

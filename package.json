@@ -29,5 +29,8 @@
     "tailwindcss": "latest",
     "eslint": "^8",
     "eslint-config-next": "14.0.4"
-  }
+  },
+  "trustedDependencies": [
+    "sharp"
+  ]
 }

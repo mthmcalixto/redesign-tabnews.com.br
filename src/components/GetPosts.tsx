@@ -15,7 +15,7 @@ import { RxEyeOpen } from 'react-icons/rx'
 import { useInView } from 'react-intersection-observer'
 import { Button } from './Button'
 
-export default function InfiniteScroll() {
+export default function InfiniteScroll({ page }: { page: string }) {
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -25,7 +25,7 @@ export default function InfiniteScroll() {
   const fetchPosts = async ({ pageParam = 1 }: { pageParam?: number }) => {
     try {
       const response = await fetch(
-        `https://www.tabnews.com.br/api/v1/contents?page=${pageParam}&per_page=15&strategy=relevant`
+        `https://www.tabnews.com.br/api/v1/contents?page=${pageParam}&per_page=15&strategy=${page}`
       )
       if (!response.ok) {
         throw new Error('Failed to fetch posts')
@@ -47,7 +47,7 @@ export default function InfiniteScroll() {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ['posts'],
+    queryKey: ['posts_' + page],
     queryFn: fetchPosts,
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.length < 5) {
@@ -96,7 +96,7 @@ export default function InfiniteScroll() {
 
   return (
     <div>
-      {postsWithData.length > 0 && (
+      {postsWithData && postsWithData.length > 0 && (
         <S.ListPosts>
           {postsWithData.map((post, i) => (
             <S.ShadowCard key={post.id} ref={ref}>
@@ -180,10 +180,9 @@ export default function InfiniteScroll() {
             role="status"
             className="flex items-start justify-start w-full flex-col gap-5"
           >
-            <div className="flex items-center justify-center h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
-            <div className="flex items-center justify-center h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
-            <div className="flex items-center justify-center h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
-            <div className="flex items-center justify-center h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
+            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
+            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
+            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
             <span className="sr-only">Loading...</span>
           </div>
         ) : isLoadingMore ? (
@@ -191,10 +190,9 @@ export default function InfiniteScroll() {
             role="status"
             className="flex items-start justify-start w-full flex-col gap-5"
           >
-            <div className="flex items-center justify-center h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
-            <div className="flex items-center justify-center h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
-            <div className="flex items-center justify-center h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
-            <div className="flex items-center justify-center h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
+            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
+            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
+            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
             <span className="sr-only">Loading...</span>
           </div>
         ) : null}

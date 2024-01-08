@@ -1,7 +1,6 @@
 import { twc } from 'react-twc'
 
 export const FlexContainer = twc.div`flex gap-3 items-start md:items-center flex-col md:flex-row`
-export const Zinc500 = twc.h3`text-zinc-500 font-medium`
 export const ListButtons = twc.div`no-scrollbar flex gap-3 w-full md:w-auto overflow-x-auto overflow-hidden md:overflow-auto md:overflow-x-hidden`
 export const ListPosts = twc.ul`flex flex-col gap-6 mb-7`
 export const ShadowCard = twc.article`shadow-sm w-full py-3 px-7 rounded-xl border border-zinc-200`

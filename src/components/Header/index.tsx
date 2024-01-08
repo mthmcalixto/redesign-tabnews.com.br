@@ -31,6 +31,9 @@ export default function Header() {
                   <FiMenu color="#fff" size={42} />
                 </div>
               </div>
+              <div className="flex md:hidden items-center">
+                <FiMenu color="#fff" size={42} />
+              </div>
             </div>
           </S.HeaderRight>
         </S.HeaderWrapper>

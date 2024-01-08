@@ -15,6 +15,7 @@ export type PostsListProps = {
   slug: string
   title: string
   tabcoins: number
+  createdAt: number
   views: number
   comments: number
   user: UserProps

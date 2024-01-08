@@ -7,8 +7,8 @@ import './globals.css'
 import Providers from './providers'
 
 export const metadata: Metadata = {
-  title: 'TabNews',
-  description: 'Redesign TabNews',
+  title: 'TabNews - Unofficial Redesign',
+  description: 'Unofficial Redesign TabNews',
 }
 
 export default function RootLayout({

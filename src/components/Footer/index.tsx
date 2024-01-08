@@ -12,7 +12,7 @@ export default function Footer() {
             <span>
               <LogoFooter width={30} height={30} />
             </span>
-            © {new Date().getFullYear()} TabNews
+            © {new Date().getFullYear()} TabNews - Unofficial Redesign
           </S.LogoContainer>
           <div>
             <S.UlContainer>

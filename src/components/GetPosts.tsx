@@ -50,7 +50,7 @@ export default function InfiniteScroll() {
     queryKey: ['posts'],
     queryFn: fetchPosts,
     getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.length < 9) {
+      if (lastPage.length < 5) {
         return undefined
       }
       return allPages.length + 1

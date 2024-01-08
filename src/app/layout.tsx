@@ -20,6 +20,7 @@ export default function RootLayout({
       <body className={cx('antialiased', GeistSans.className)}>
         <Header />
         <Providers>{children}</Providers>
+
         <Footer />
       </body>
     </html>

@@ -21,6 +21,9 @@ export type PostsListProps = {
   user: UserProps
   tags: TagsProps[]
   ads?: boolean
+  owner_id?: string
+  owner_username?: string
+  children_deep_count?: string
 }
 
 export type CardTrendingListProps = {

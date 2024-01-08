@@ -3,6 +3,7 @@ import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
 import { cx } from 'react-twc'
 import './globals.css'
+import Providers from './providers'
 
 export const metadata: Metadata = {
   title: 'TabNews',
@@ -18,7 +19,7 @@ export default function RootLayout({
     <html lang="pt_BR">
       <body className={cx('antialiased', GeistSans.className)}>
         <Header />
-        {children}
+        <Providers>{children}</Providers>
         <Footer />
       </body>
     </html>

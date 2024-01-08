@@ -5,7 +5,7 @@ type BadgeProps = {
 
 const Badge = ({ content, color }: BadgeProps) => (
   <span
-    className={`inline-block py-1 px-2 text-sm text-white rounded-md ${color} lowercase mr-1`}
+    className={`inline-block px-2 text-sm text-white rounded-md ${color} lowercase mr-1`}
   >
     {content}
   </span>

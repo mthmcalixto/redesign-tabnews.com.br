@@ -1,6 +1,6 @@
 export async function getPots(): Promise<any[]> {
   const res = await fetch(
-    `https://www.tabnews.com.br/api/v1/contents?page=1&per_page=30&strategy=relevant`,
+    `https://www.tabnews.com.br/api/v1/contents?page=1&per_page=70&strategy=relevant`,
     { next: { revalidate: 50 } }
   )
   const posts: any[] = await res.json()

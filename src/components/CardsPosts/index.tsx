@@ -1,6 +1,7 @@
 // import { PostsList } from '@/data/dataPosts'
 import { getPots } from '@/data/postsWithData'
 import { formatNumber } from '@/utils/formatNumber'
+import { formatTitle } from '@/utils/formatTitle'
 import { formatCreatedAt } from '@/utils/postFormart'
 import { Button } from '@TabNewsUI'
 import Link from 'next/link'
@@ -32,7 +33,7 @@ export default async function Posts() {
               <S.ShadowCard key={x.id}>
                 <div className="flex gap-9 items-center justify-start">
                   <span className="text-2xl hidden md:block">{i + 1}.</span>
-                  <div className="flex gap-4 justify-between w-full flex-col md:flex-row">
+                  <div className="flex gap-6 justify-between w-full flex-col md:flex-row">
                     <div className="flex flex-col gap-5 w-full md:w-1/2 justify-start">
                       <div className="w-fit flex gap-3">
                         <span className="text-2xl flex md:hidden">
@@ -45,10 +46,10 @@ export default async function Posts() {
                           passHref
                         >
                           <h2
-                            className="md:truncate break-words text-ellipsis overflow-hidden"
+                            className="md:truncate break-words text-ellipsis overflow-hidden items-center"
                             title={x.title}
                           >
-                            {x.title}
+                            {formatTitle(x.title)}
                           </h2>
                         </Link>
                       </div>

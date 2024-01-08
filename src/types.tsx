@@ -17,13 +17,13 @@ export type PostsListProps = {
   tabcoins: number
   views: number
   comments: number
-  createdAt: number
   user: UserProps
   tags: TagsProps[]
   ads?: boolean
   owner_id?: string
   owner_username?: string
   children_deep_count?: string
+  created_at?: string
 }
 
 export type CardTrendingListProps = {

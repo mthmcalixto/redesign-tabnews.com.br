@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.17.9",
+    "@vercel/analytics": "^1.1.1",
     "class-variance-authority": "^0.7.0",
     "geist": "^1.2.0",
     "next": "14.0.4",

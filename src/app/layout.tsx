@@ -1,4 +1,5 @@
 import { Footer, Header } from '@TabNewsUI'
+import { Analytics } from '@vercel/analytics/react'
 import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
 import { cx } from 'react-twc'
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="pt_BR">
       <body className={cx('antialiased', GeistSans.className)}>
         <Header />
-        <Providers>{children}</Providers>
+        <Providers>
+          {children} <Analytics />
+        </Providers>
         <Footer />
       </body>
     </html>

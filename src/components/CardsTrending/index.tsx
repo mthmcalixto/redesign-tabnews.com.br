@@ -54,8 +54,6 @@ export default function CardsTrending() {
               setDisableFading(null)
             }
           }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log('slide change')}
         >
           {CardsTrendingList.map((x, _) => {
             return (

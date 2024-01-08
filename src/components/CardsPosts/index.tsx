@@ -25,16 +25,19 @@ export default async function Posts() {
           <Button $intent="clips">Jobs</Button>
         </S.ListButtons>
       </S.FlexContainer>
-      <div className="mt-8">
+      <div className="mt-10">
         <S.ListPosts>
           {PostListTabNews.map((x: any, i: any) => {
             return (
               <S.ShadowCard key={x.id}>
                 <div className="flex gap-9 items-center justify-start">
-                  <span className="text-2xl">{i + 1}.</span>
-                  <div className="flex gap-3 justify-between w-full flex-col md:flex-row">
+                  <span className="text-2xl hidden md:block">{i + 1}.</span>
+                  <div className="flex gap-4 justify-between w-full flex-col md:flex-row">
                     <div className="flex flex-col gap-5 w-full md:w-1/2 justify-start">
-                      <div className="w-fit">
+                      <div className="w-fit flex gap-3">
+                        <span className="text-2xl flex md:hidden">
+                          {i + 1}.
+                        </span>
                         <Link
                           className="grid md:truncate break-words text-xl font-medium text-ellipsis overflow-hidden hover:opacity-45 visited:text-zinc-400"
                           href={`https://www.tabnews.com.br/${x.user.username}/${x.slug}`}
@@ -49,9 +52,15 @@ export default async function Posts() {
                           </h2>
                         </Link>
                       </div>
-                      <ul className="flex gap-5 items-center flex-wrap md:flex-row">
+                      <ul className="flex gap-5 justify-between items-start md:justify-start md:items-center flex-wrap md:flex-row">
                         <S.Tabcoins>
-                          <S.BlueCircle />
+                          {x.tabcoins >= 18 ? (
+                            <S.YellowCircle />
+                          ) : x.tabcoins <= 0 ? (
+                            <S.RedCircle />
+                          ) : (
+                            <S.BlueCircle />
+                          )}
                           {x.tabcoins} tabcoins
                         </S.Tabcoins>
                         <S.UserIcon>

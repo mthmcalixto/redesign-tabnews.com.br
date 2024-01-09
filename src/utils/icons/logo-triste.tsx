@@ -6,14 +6,9 @@ export default function LogoTriste(props: any) {
       viewBox="0 0 800 800"
       fill="none"
     >
-      <link type="text/css" rel="stylesheet" id="dark-mode-custom-link" />
-      <link type="text/css" rel="stylesheet" id="dark-mode-general-link" />
-      <style lang="en" type="text/css" id="dark-mode-custom-style" />
-      <style lang="en" type="text/css" id="dark-mode-native-style" />
-      <style lang="en" type="text/css" id="dark-mode-native-sheet" />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M575 225C616.422 225 650 258.579 650 300V550C650 591.423 616.422 625.001 575 625.001H225C183.579 625.001 150 591.423 150 550V300C150 258.579 183.579 225 225 225H575ZM600 365.62H425.002C411.197 365.62 396.107 355.127 391.302 342.183L366.357 275H225C211.193 275 200 286.193 200 300V550C200 563.808 211.193 575.001 225 575.001H575C588.807 575.001 600 563.808 600 550V365.62Z"
         fill="currentColor"
       />

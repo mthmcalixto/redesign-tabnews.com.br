@@ -106,8 +106,6 @@ export default function InfiniteScroll({ page }: { page: string }) {
     }
   }, [isFetching])
 
-  console.log(isFetching)
-
   return (
     <div>
       {postsWithData && postsWithData.length > 0 && (

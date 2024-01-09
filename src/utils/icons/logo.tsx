@@ -19,7 +19,7 @@ export default function Logo(props: any) {
         id="TabNews"
         transform="translate(45.214 22)"
         fill="currentColor"
-        fontSize="23"
+        fontSize="22"
         fontFamily="Geist-Regular, Geist"
       >
         <tspan x="0" y="0">

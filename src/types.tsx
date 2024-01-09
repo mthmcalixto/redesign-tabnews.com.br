@@ -11,6 +11,7 @@ type TagsProps = {
 }
 
 export type PostsListProps = {
+  date: string
   id: string
   slug: string
   title: string

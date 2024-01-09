@@ -7,8 +7,6 @@ export default function ButtonsPage() {
   const headersList = headers()
   const header_url = headersList.get('x-pathname') || ''
 
-  console.log(header_url)
-
   const buttonsData = [
     { text: 'News', path: '/' },
     { text: 'Recents', path: '/recents' },

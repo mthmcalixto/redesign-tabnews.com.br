@@ -19,6 +19,7 @@ import { Button } from './Button'
 export const revalidate = 10
 
 export default function InfiniteScroll({ page }: { page: string }) {
+  const API_URL = 'https://www.tabnews.com.br/api/v1/contents'
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -27,21 +28,21 @@ export default function InfiniteScroll({ page }: { page: string }) {
 
   const fetchPosts = async ({ pageParam = 1 }: { pageParam?: number }) => {
     try {
-      const response = await axios.get(
-        `https://www.tabnews.com.br/api/v1/contents`,
-        {
-          params: {
-            page: pageParam,
-            per_page: 15,
-            strategy: page,
-          },
-        }
-      )
-      if (!response.data || response.data.length === 0) {
+      const response = await axios.get(API_URL, {
+        params: {
+          page: pageParam,
+          per_page: 15,
+          strategy: page,
+        },
+      })
+
+      const data: PostsListProps[] = await response.data
+
+      if (!data || data.length === 0) {
         throw new Error('Failed to fetch posts')
       }
-      const data: PostsListProps[] = await response.data
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+
+      await new Promise((resolve) => setTimeout(resolve, 300))
       return data
     } catch (error) {
       console.error(error)
@@ -61,14 +62,18 @@ export default function InfiniteScroll({ page }: { page: string }) {
     queryKey: ['posts_' + page],
     queryFn: fetchPosts,
     getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.length < 5) {
-        return undefined
-      }
-      return allPages.length + 1
+      const nextPage =
+        page === 'new'
+          ? lastPage.length === 15 && allPages.length * 15 < 100
+            ? allPages.length + 1
+            : undefined
+          : lastPage.length === 15
+          ? allPages.length + 1
+          : undefined
+      return nextPage
     },
     initialPageParam: 1,
-    refetchInterval: 60000,
-    staleTime: 60000,
+    staleTime: Infinity,
   })
 
   const posts = data ? data.pages.flatMap((page) => page) : []
@@ -188,7 +193,7 @@ export default function InfiniteScroll({ page }: { page: string }) {
         </S.ListPosts>
       )}
       <div>
-        {isLoading ? (
+        {isFetching ? (
           <div
             role="status"
             className="flex items-start justify-start w-full flex-col gap-5"

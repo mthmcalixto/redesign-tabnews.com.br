@@ -68,14 +68,15 @@ export default function CardsTrending() {
                       <S.CardAdsTitle>AD</S.CardAdsTitle>
                     </S.CardAdsContent>
                   )}
-                  <div className="w-full h-40 relative">
+                  <div className="w-full h-full relative">
                     <Image
                       className="w-full h-full cover rounded-xl"
                       src={x.img_url}
                       alt=""
+                      width={380}
+                      height={148}
                       quality={100}
                       priority
-                      layout="fill"
                       objectFit="cover"
                     />
                   </div>

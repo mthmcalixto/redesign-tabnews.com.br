@@ -1,10 +1,5 @@
 import { LogoTriste } from '@/utils/icons'
-import { Metadata } from 'next'
 import Link from 'next/link'
-
-export const metadata: Metadata = {
-  title: '404 - Not Found · TabNews - Unofficial Redesign',
-}
 
 export default function NotFound() {
   return (

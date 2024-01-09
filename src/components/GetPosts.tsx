@@ -133,6 +133,7 @@ export default function InfiniteScroll({ page }: { page: string }) {
                       <Link
                         className="grid md:truncate break-words text-xl font-medium text-ellipsis overflow-hidden hover:opacity-45 visited:text-zinc-400"
                         href={`https://www.tabnews.com.br/${post.user.username}/${post.slug}`}
+                        rel="nofollow ugc"
                         target="_blank"
                         passHref
                       >

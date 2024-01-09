@@ -38,7 +38,8 @@ export default function InfiniteScroll({ page }: { page: string }) {
 
       const data: PostsListProps[] = await response.data
 
-      if (!data || data.length === 0) {
+      let responseOK = response && response.status === 200
+      if (!responseOK) {
         throw new Error('Failed to fetch posts')
       }
 
@@ -62,14 +63,19 @@ export default function InfiniteScroll({ page }: { page: string }) {
     queryKey: ['posts_' + page],
     queryFn: fetchPosts,
     getNextPageParam: (lastPage, allPages) => {
+      const isLastPageLengthValid =
+        lastPage.length === 15 && allPages.length * 15 < 100
+      const isLastPageLengthUnderLimit = lastPage.length < 5
+
       const nextPage =
         page === 'new'
-          ? lastPage.length === 15 && allPages.length * 15 < 100
+          ? isLastPageLengthValid
             ? allPages.length + 1
             : undefined
-          : lastPage.length === 15
-          ? allPages.length + 1
-          : undefined
+          : isLastPageLengthUnderLimit
+          ? undefined
+          : allPages.length + 1
+
       return nextPage
     },
     initialPageParam: 1,

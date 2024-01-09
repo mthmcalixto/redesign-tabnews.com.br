@@ -16,14 +16,12 @@ import { RxEyeOpen } from 'react-icons/rx'
 import { useInView } from 'react-intersection-observer'
 import { Button } from './Button'
 
-export const revalidate = 10
-
 export default function InfiniteScroll({ page }: { page: string }) {
   const API_URL = 'https://www.tabnews.com.br/api/v1/contents'
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 1,
   })
 
   const fetchPosts = async ({ pageParam = 1 }: { pageParam?: number }) => {
@@ -118,12 +116,18 @@ export default function InfiniteScroll({ page }: { page: string }) {
     }
   }, [isFetching])
 
+  // Get last post to release fetch
+  const postsCount = postsWithData ? postsWithData.length : 0
+
   return (
     <div>
       {postsWithData && postsWithData.length > 0 && (
         <S.ListPosts>
           {postsWithData.map((post, i) => (
-            <S.ShadowCard key={post.id} ref={ref}>
+            <S.ShadowCard
+              key={`${post.id}_${i}`}
+              ref={i === postsCount - 1 ? ref : null}
+            >
               <div className="flex gap-9 items-center justify-start">
                 <span className="text-2xl hidden md:block">{i + 1}.</span>
                 <div className="flex gap-6 justify-between w-full flex-col md:flex-row">

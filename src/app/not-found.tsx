@@ -1,5 +1,6 @@
 import { LogoTriste } from '@/utils/icons'
 import { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: '404 - Not Found · TabNews - Unofficial Redesign',
@@ -17,9 +18,9 @@ export default function NotFound() {
         Not Found
       </h2>
       <p>Could not find requested resource</p>
-      <a href="/" className="mt-5 text-blue-600 hover:underline">
+      <Link href="/" className="mt-5 text-blue-600 hover:underline" passHref>
         Return Home
-      </a>
+      </Link>
     </div>
   )
 }

@@ -54,6 +54,7 @@ export default function InfiniteScroll({ page }: { page: string }) {
     fetchNextPage,
     hasNextPage,
     isFetching,
+    isLoading,
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
@@ -187,7 +188,7 @@ export default function InfiniteScroll({ page }: { page: string }) {
         </S.ListPosts>
       )}
       <div>
-        {isFetching ? (
+        {isLoading ? (
           <div
             role="status"
             className="flex items-start justify-start w-full flex-col gap-5"

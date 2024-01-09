@@ -4,7 +4,6 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: '404 - Not Found · TabNews - Unofficial Redesign',
-  description: '...',
 }
 
 export default function NotFound() {
@@ -19,7 +18,7 @@ export default function NotFound() {
         Not Found
       </h2>
       <p>Could not find requested resource</p>
-      <Link href="/" className="mt-5 text-blue-600 hover:underline">
+      <Link href="/" className="mt-5 text-blue-600 hover:underline" passHref>
         Return Home
       </Link>
     </div>

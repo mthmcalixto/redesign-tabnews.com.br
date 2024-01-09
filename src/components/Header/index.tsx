@@ -1,4 +1,5 @@
 import { Logo } from '@/utils/icons'
+import Link from 'next/link'
 import { BiSearch } from 'react-icons/bi'
 import { FiMenu } from 'react-icons/fi'
 import { Button } from '../Button'
@@ -11,7 +12,9 @@ export default function Header() {
         <S.HeaderWrapper>
           <S.HeaderLeft>
             <S.LogoRoot>
-              <Logo color="#fff" width={144.214} height={28.583} />
+              <Link href="/" passHref className="hover:opacity-45">
+                <Logo color="#fff" width={144.214} height={28.583} />
+              </Link>
               <BiSearch size={27} color="#C9D1D9" />
             </S.LogoRoot>
           </S.HeaderLeft>

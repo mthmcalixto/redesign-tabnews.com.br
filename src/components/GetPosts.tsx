@@ -6,6 +6,7 @@ import { formatNumber } from '@/utils/formatNumber'
 import { formatTitle } from '@/utils/formatTitle'
 import { formatCreatedAt } from '@/utils/postFormart'
 import { useInfiniteQuery } from '@tanstack/react-query'
+import axios from 'axios'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { IoChatboxOutline } from 'react-icons/io5'
@@ -14,6 +15,8 @@ import { PiClockCounterClockwiseFill } from 'react-icons/pi'
 import { RxEyeOpen } from 'react-icons/rx'
 import { useInView } from 'react-intersection-observer'
 import { Button } from './Button'
+
+export const revalidate = 10
 
 export default function InfiniteScroll({ page }: { page: string }) {
   const [isLoadingMore, setIsLoadingMore] = useState(false)
@@ -24,13 +27,20 @@ export default function InfiniteScroll({ page }: { page: string }) {
 
   const fetchPosts = async ({ pageParam = 1 }: { pageParam?: number }) => {
     try {
-      const response = await fetch(
-        `https://www.tabnews.com.br/api/v1/contents?page=${pageParam}&per_page=15&strategy=${page}`
+      const response = await axios.get(
+        `https://www.tabnews.com.br/api/v1/contents`,
+        {
+          params: {
+            page: pageParam,
+            per_page: 15,
+            strategy: page,
+          },
+        }
       )
-      if (!response.ok) {
+      if (!response.data || response.data.length === 0) {
         throw new Error('Failed to fetch posts')
       }
-      const data: PostsListProps[] = await response.json()
+      const data: PostsListProps[] = await response.data
       await new Promise((resolve) => setTimeout(resolve, 2000))
       return data
     } catch (error) {
@@ -56,6 +66,8 @@ export default function InfiniteScroll({ page }: { page: string }) {
       return allPages.length + 1
     },
     initialPageParam: 1,
+    refetchInterval: 60000,
+    staleTime: 60000,
   })
 
   const posts = data ? data.pages.flatMap((page) => page) : []
@@ -93,6 +105,8 @@ export default function InfiniteScroll({ page }: { page: string }) {
       setIsLoadingMore(false)
     }
   }, [isFetching])
+
+  console.log(isFetching)
 
   return (
     <div>

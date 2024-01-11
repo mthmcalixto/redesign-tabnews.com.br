@@ -3,7 +3,7 @@ export async function getPots(): Promise<any[]> {
     `https://www.tabnews.com.br/api/v1/contents?page=1&per_page=70&strategy=relevant`,
     { next: { revalidate: 50 } }
   )
-  const posts: any[] = await res.json()
+  const posts = (await res.json()) as any[]
 
   const popularTags = [
     { id: '1', name: 'javascript', slug: 'javascript' },

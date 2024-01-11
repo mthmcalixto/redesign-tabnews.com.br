@@ -3,14 +3,14 @@ import PageTab from '@/components/PageTab'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Recents · TabNews - Unofficial Redesign',
+  title: 'All · TabNews - Unofficial Redesign',
   description: 'Unofficial Redesign TabNews',
 }
 
-export default function Recents() {
+export default function All() {
   return (
     <PageTab>
-      <CardsPosts page={'new'} keyPage={'new_recents'} />
+      <CardsPosts page={'new'} allPage keyPage={'new_all'} />
     </PageTab>
   )
 }

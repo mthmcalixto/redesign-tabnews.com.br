@@ -9,6 +9,7 @@ import { SwiperSlide as Card, Swiper } from 'swiper/react'
 import { Swiper as SwiperCore } from 'swiper/types'
 import * as S from './styles'
 
+import Link from 'next/link'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
@@ -55,35 +56,37 @@ export default function CardsTrending() {
             }
           }}
         >
-          {CardsTrendingList.map((x, _) => {
+          {CardsTrendingList.map((x, i) => {
             return (
               <Card
-                className="relative w-fit max-w-[369px] h-card-trending rounded-xl shadow-sm mr-0 md:mr-[1.2rem]"
+                className="relative w-fit max-w-[369px] h-card-trending rounded-xl shadow-sm mr-0 md:mr-[1.2rem] hover:opacity-80"
                 key={x.id}
               >
-                <S.CardOverlay />
-                <S.CardContent>
-                  {x.ads && (
-                    <S.CardAdsContent>
-                      <S.CardAdsTitle>AD</S.CardAdsTitle>
-                    </S.CardAdsContent>
-                  )}
-                  <div className="w-full h-full relative">
-                    <Image
-                      className="w-full h-full cover rounded-xl"
-                      src={x.img_url}
-                      alt=""
-                      width={380}
-                      height={148}
-                      quality={100}
-                      priority
-                      objectFit="cover"
-                    />
-                  </div>
-                  <S.CardTitle>
-                    <h2>{x.title}</h2>
-                  </S.CardTitle>
-                </S.CardContent>
+                <Link href={x.link} passHref target="_blank">
+                  <S.CardOverlay />
+                  <S.CardContent>
+                    {x.ads && (
+                      <S.CardAdsContent>
+                        <S.CardAdsTitle>AD</S.CardAdsTitle>
+                      </S.CardAdsContent>
+                    )}
+                    <div className="w-full h-full relative">
+                      <Image
+                        className="w-full h-full cover rounded-xl"
+                        src={x.img_url}
+                        alt=""
+                        width={380}
+                        height={148}
+                        quality={100}
+                        priority
+                        objectFit="cover"
+                      />
+                    </div>
+                    <S.CardTitle>
+                      <h2>{x.title}</h2>
+                    </S.CardTitle>
+                  </S.CardContent>
+                </Link>
               </Card>
             )
           })}
@@ -92,7 +95,7 @@ export default function CardsTrending() {
           <button
             className={`${
               disableFading == 'isBeginning' ? 'hidden' : 'flex'
-            } absolute shadow-lg rounded-full bg-white w-10 h-10  justify-center items-center -left-5 hover:opacity-85`}
+            } absolute shadow-lg rounded-full bg-white dark:bg-[#21262d] w-10 h-10  justify-center items-center -left-5 hover:opacity-85`}
             onClick={() => swiperRef.current?.slidePrev()}
           >
             <IoIosArrowBack size={24} />
@@ -100,7 +103,7 @@ export default function CardsTrending() {
           <button
             className={`${
               disableFading == 'isEnd' ? 'hidden' : 'flex'
-            } absolute shadow-lg rounded-full bg-white w-10 h-10  justify-center items-center -right-5 hover:opacity-85`}
+            } absolute shadow-lg rounded-full bg-white dark:bg-[#21262d] w-10 h-10  justify-center items-center -right-5 hover:opacity-85`}
             onClick={() => swiperRef.current?.slideNext()}
           >
             <IoIosArrowForward size={24} />

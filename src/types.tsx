@@ -34,3 +34,9 @@ export type CardTrendingListProps = {
   link: string
   ads?: boolean
 }
+
+export type PageProps = {
+  page: 'new' | 'old' | 'relevant'
+  allPage?: boolean
+  keyPage: string
+}

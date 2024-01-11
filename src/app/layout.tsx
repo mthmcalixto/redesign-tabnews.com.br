@@ -1,10 +1,11 @@
+import { QueryClientProvider } from '@/providers/QueryClientProvider'
+import { ThemeProvider } from '@/providers/ThemeProdiver'
 import { Footer, Header } from '@TabNewsUI'
 import { Analytics } from '@vercel/analytics/react'
 import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
 import { cx } from 'react-twc'
 import './globals.css'
-import Providers from './providers'
 
 export const metadata: Metadata = {
   title: 'TabNews - Unofficial Redesign',
@@ -17,13 +18,24 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt_BR">
-      <body className={cx('antialiased', GeistSans.className)}>
-        <Header />
-        <Providers>
-          {children} <Analytics />
-        </Providers>
-        <Footer />
+    <html lang="pt_BR" suppressHydrationWarning>
+      <body
+        className={cx(
+          'antialiased bg-[#fafafa] dark:bg-[#0d1117] dark:text-[#e6edf3]',
+          GeistSans.className
+        )}
+      >
+        <QueryClientProvider>
+          <ThemeProvider
+            attribute="class"
+            enableColorScheme={false}
+            enableSystem
+          >
+            <Header />
+            {children} <Analytics />
+            <Footer />
+          </ThemeProvider>
+        </QueryClientProvider>
       </body>
     </html>
   )

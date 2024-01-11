@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { BiSearch } from 'react-icons/bi'
 import { FiMenu } from 'react-icons/fi'
 import { Button } from '../Button'
+import ThemeToggle from '../ThemeToggle'
 import * as S from './styles'
 
 export default function Header() {
@@ -35,6 +36,7 @@ export default function Header() {
                 </div>
               </div>
               <div className="flex md:hidden items-center">
+                <ThemeToggle />
                 <FiMenu color="#fff" size={42} />
               </div>
             </div>

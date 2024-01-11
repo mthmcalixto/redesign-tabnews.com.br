@@ -1,7 +1,7 @@
 'use client'
 
 import * as S from '@/components/CardsPosts/styles'
-import { PostsListProps } from '@/types'
+import { PageProps, PostsListProps } from '@/types'
 import { formatNumber } from '@/utils/formatNumber'
 import { formatTitle } from '@/utils/formatTitle'
 import { formatCreatedAt } from '@/utils/postFormart'
@@ -16,7 +16,7 @@ import { RxEyeOpen } from 'react-icons/rx'
 import { useInView } from 'react-intersection-observer'
 import { Button } from './Button'
 
-export default function InfiniteScroll({ page }: { page: string }) {
+export default function InfiniteScroll({ page, allPage, keyPage }: PageProps) {
   const API_URL = 'https://www.tabnews.com.br/api/v1/contents'
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [ref, inView] = useInView({
@@ -58,21 +58,20 @@ export default function InfiniteScroll({ page }: { page: string }) {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ['posts_' + page],
+    queryKey: ['posts_' + keyPage],
     queryFn: fetchPosts,
     getNextPageParam: (lastPage, allPages) => {
       const isLastPageLengthValid =
         lastPage.length === 15 && allPages.length * 15 < 100
       const isLastPageLengthUnderLimit = lastPage.length < 5
 
-      const nextPage =
-        page === 'new'
-          ? isLastPageLengthValid
-            ? allPages.length + 1
-            : undefined
-          : isLastPageLengthUnderLimit
-          ? undefined
-          : allPages.length + 1
+      const nextPage = !allPage
+        ? isLastPageLengthValid
+          ? allPages.length + 1
+          : undefined
+        : isLastPageLengthUnderLimit
+        ? undefined
+        : allPages.length + 1
 
       return nextPage
     },
@@ -135,7 +134,7 @@ export default function InfiniteScroll({ page }: { page: string }) {
                     <div className="w-fit flex gap-3">
                       <span className="text-2xl flex md:hidden">{i + 1}.</span>
                       <Link
-                        className="grid md:truncate break-words text-xl font-medium text-ellipsis overflow-hidden hover:opacity-45 visited:text-zinc-400"
+                        className="grid md:truncate break-words text-xl font-medium text-ellipsis overflow-hidden hover:opacity-45 visited:text-zinc-400 dark:visited:text-[#6e7681]"
                         href={`https://www.tabnews.com.br/${post.user.username}/${post.slug}`}
                         rel="nofollow ugc"
                         target="_blank"
@@ -153,7 +152,7 @@ export default function InfiniteScroll({ page }: { page: string }) {
                       <S.Tabcoins>
                         {post.tabcoins >= 18 ? (
                           <S.YellowCircle />
-                        ) : post.tabcoins <= 0 ? (
+                        ) : post.tabcoins < 0 ? (
                           <S.RedCircle />
                         ) : (
                           <S.BlueCircle />
@@ -209,9 +208,9 @@ export default function InfiniteScroll({ page }: { page: string }) {
             role="status"
             className="flex items-start justify-start w-full flex-col gap-5"
           >
-            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
-            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
-            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
+            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-300 dark:bg-[#181e27]/[0.8] rounded-lg animate-pulse"></div>
+            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-300 dark:bg-[#181e27]/[0.8] rounded-lg animate-pulse"></div>
+            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-300 dark:bg-[#181e27]/[0.8] rounded-lg animate-pulse"></div>
             <span className="sr-only">Loading...</span>
           </div>
         ) : isLoadingMore ? (
@@ -219,9 +218,9 @@ export default function InfiniteScroll({ page }: { page: string }) {
             role="status"
             className="flex items-start justify-start w-full flex-col gap-5"
           >
-            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
-            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
-            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-200 rounded-lg animate-pulse"></div>
+            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-300 dark:bg-[#181e27]/[0.8] rounded-lg animate-pulse"></div>
+            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-300 dark:bg-[#181e27]/[0.8] rounded-lg animate-pulse"></div>
+            <div className="flex items-center justify-center h-44 md:h-24 w-full bg-gray-300 dark:bg-[#181e27]/[0.8] rounded-lg animate-pulse"></div>
             <span className="sr-only">Loading...</span>
           </div>
         ) : null}

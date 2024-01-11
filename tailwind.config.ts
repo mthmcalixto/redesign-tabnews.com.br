@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -18,6 +19,7 @@ const config: Config = {
       colors: {
         'footer-nav-links': '#0969DA',
         'header-color': '#24292F',
+        'header-color-dark': '#161b22',
         'header-color-secondary': '#C9D1D9',
       },
     },

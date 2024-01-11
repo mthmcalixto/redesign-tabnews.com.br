@@ -1,6 +1,6 @@
 import { twc } from 'react-twc'
 
-export const Title = twc.h2`text-zinc-500 font-medium text-base`
+export const Title = twc.h2`text-zinc-500 dark:text-zinc-400 font-medium text-base`
 export const Wrapper = twc.div`mt-3 relative`
 export const CardOverlay = twc.div`absolute z-20 bg-gradient-to-t from-black w-full h-full rounded-xl`
 export const CardContent = twc.div`w-full h-full`

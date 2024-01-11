@@ -34,7 +34,7 @@ export default function GoToTopButton() {
       <div
         aria-label="Retornar ao topo"
         onClick={handleScrollToTop}
-        className="fixed bottom-5 right-4 p-3 hover:bg-zinc-100 rounded-md hover:cursor-pointer"
+        className="fixed bottom-5 right-4 p-3 hover:bg-[#d0d7de52] dark:bg-[#b1bac41f] rounded-md hover:cursor-pointer"
       >
         <MdKeyboardArrowUp size={20} />
       </div>

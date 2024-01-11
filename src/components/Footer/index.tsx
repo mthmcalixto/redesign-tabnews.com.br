@@ -1,5 +1,6 @@
 import { LogoFooter } from '@/utils/icons'
 
+import ThemeToggle from '@/components/ThemeToggle'
 import * as S from './styles'
 
 export default function Footer() {
@@ -14,7 +15,7 @@ export default function Footer() {
             </span>
             © {new Date().getFullYear()} TabNews - Unofficial Redesign
           </S.LogoContainer>
-          <div>
+          <div className="flex flex-row gap-2 justify-between">
             <S.UlContainer>
               <li>Contact</li>
               <li>GitHub</li>
@@ -24,6 +25,7 @@ export default function Footer() {
               <li>Terms of Use</li>
               <li>Museum</li>
             </S.UlContainer>
+            <ThemeToggle />
           </div>
         </S.FlexContainer>
       </S.Container>

@@ -1,9 +1,11 @@
 'use client'
 
+import { Button } from '@/components/Button'
 import * as S from '@/components/CardsPosts/styles'
 import { PageProps, PostsListProps } from '@/types'
 import { formatNumber } from '@/utils/formatNumber'
 import { formatTitle } from '@/utils/formatTitle'
+import { getRandomTags } from '@/utils/getRandomTags'
 import { formatCreatedAt } from '@/utils/postFormart'
 import { useInfiniteQuery } from '@tanstack/react-query'
 import axios from 'axios'
@@ -14,11 +16,14 @@ import { LiaUserSolid } from 'react-icons/lia'
 import { PiClockCounterClockwiseFill } from 'react-icons/pi'
 import { RxEyeOpen } from 'react-icons/rx'
 import { useInView } from 'react-intersection-observer'
-import { Button } from './Button'
 
 export default function InfiniteScroll({ page, allPage, keyPage }: PageProps) {
   const API_URL = 'https://www.tabnews.com.br/api/v1/contents'
   const [isLoadingMore, setIsLoadingMore] = useState(false)
+  const [postTagsMap, setPostTagsMap] = useState<{ [postId: string]: any[] }>(
+    {}
+  )
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 1,
@@ -82,18 +87,23 @@ export default function InfiniteScroll({ page, allPage, keyPage }: PageProps) {
   const posts = data ? data.pages.flatMap((page) => page) : []
 
   const postsWithData: any[] = posts.map((post) => {
+    const existingTags = postTagsMap[post.id]
+
+    const randomTags = existingTags || getRandomTags(0, 5)
+
+    if (!existingTags) {
+      setPostTagsMap((prevTagsMap) => ({
+        ...prevTagsMap,
+        [post.id]: randomTags,
+      }))
+    }
+
     return {
       ...post,
       views: Math.floor(Math.random() * 100001),
       comments: post.children_deep_count,
       createdAt: post.created_at,
-      tags: [
-        {
-          id: '1',
-          name: 'test',
-          slug: 'test',
-        },
-      ],
+      tags: randomTags,
       user: {
         id: post.owner_id,
         username: post.owner_username,
@@ -130,7 +140,7 @@ export default function InfiniteScroll({ page, allPage, keyPage }: PageProps) {
               <div className="flex gap-9 items-center justify-start">
                 <span className="text-2xl hidden md:block">{i + 1}.</span>
                 <div className="flex gap-6 justify-between w-full flex-col md:flex-row">
-                  <div className="flex flex-col gap-5 w-full md:w-1/2 justify-start">
+                  <div className="flex flex-col gap-3 w-full md:w-1/1 justify-start">
                     <div className="w-fit flex gap-3">
                       <span className="text-2xl flex md:hidden">{i + 1}.</span>
                       <Link
@@ -184,18 +194,18 @@ export default function InfiniteScroll({ page, allPage, keyPage }: PageProps) {
                         {formatNumber(post.views)}
                       </S.EyeIcon>
                     </ul>
+                    <S.TagsContainer>
+                      <ul className="flex gap-2 flex-wrap md:flex-row">
+                        {post.tags.map((x: any, _: any) => {
+                          return (
+                            <Button $intent="tags" key={x.id}>
+                              {x.name}
+                            </Button>
+                          )
+                        })}
+                      </ul>
+                    </S.TagsContainer>
                   </div>
-                  <S.TagsContainer>
-                    <ul className="flex gap-2 flex-wrap md:flex-row">
-                      {post.tags.map((x: any, _: any) => {
-                        return (
-                          <Button $intent="tabs" key={x.id}>
-                            {x.name}
-                          </Button>
-                        )
-                      })}
-                    </ul>
-                  </S.TagsContainer>
                 </div>
               </div>
             </S.ShadowCard>

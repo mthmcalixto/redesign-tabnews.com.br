@@ -12,4 +12,4 @@ export const UserIcon = twc.span`flex gap-2 items-center font-medium text-sm`
 export const CommentsIcon = twc.span`flex gap-2 items-center font-medium text-sm`
 export const ClockIcon = twc.span`flex gap-2 items-center text-zinc-400 font-medium text-sm`
 export const EyeIcon = twc.span`flex gap-2 items-center text-zinc-400 font-medium text-sm`
-export const TagsContainer = twc.div`w-full md:w-1/2 flex flex-col gap-2 items-start md:items-end justify-center`
+export const TagsContainer = twc.div`w-full flex flex-col gap-2 items-start justify-center pt-3`

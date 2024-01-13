@@ -76,14 +76,16 @@ export default function CardsTrending() {
                         src={x.img_url}
                         alt=""
                         width={380}
-                        height={148}
+                        height={178}
                         quality={100}
                         priority
-                        objectFit="cover"
+                        objectFit="fill"
                       />
                     </div>
                     <S.CardTitle>
-                      <h2>{x.title}</h2>
+                      <h2 className="line-clamp-2 text-lg break-words text-ellipsis overflow-hidden items-center">
+                        {x.title}
+                      </h2>
                     </S.CardTitle>
                   </S.CardContent>
                 </Link>

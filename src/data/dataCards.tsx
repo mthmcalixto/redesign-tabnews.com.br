@@ -3,40 +3,45 @@ import { CardTrendingListProps } from '@/types'
 export const CardsTrendingList: CardTrendingListProps[] = [
   {
     id: '1',
-    title: '5 Ways to Reduce SaaS Security Risks',
-    img_url: '/imgs/5.png',
-    link: 'https://thehackernews.com/2024/01/5-ways-to-reduce-saas-security-risks.html',
+    title:
+      'Quero transforma um site em uma imagem sem ter que tirar print, alguem poderia me ajudar com isso?',
+    img_url:
+      'https://www.tabnews.com.br/api/v1/contents/DavidBarbieri/quero-transforma-um-site-em-uma-imagem-sem-ter-que-tirar-print-alguem-poderia-me-ajudar-com-isso/thumbnail',
+    link: 'https://www.tabnews.com.br/DavidBarbieri/quero-transforma-um-site-em-uma-imagem-sem-ter-que-tirar-print-alguem-poderia-me-ajudar-com-isso',
     ads: true,
   },
   {
     id: '2',
-    title:
-      'GitHub Warns that Lazarus Hacker Group Targeting Developers User Account',
-    img_url: '/imgs/3.jpg',
-    link: 'https://cybersecuritynews.com/lazarus-hacker-group-targeting-developers/',
+    title: 'Gateway de Pagamento',
+    img_url:
+      'https://www.tabnews.com.br/api/v1/contents/PauloTIgit/gateway-de-pagamento/thumbnail',
+    link: 'https://www.tabnews.com.br/PauloTIgit/gateway-de-pagamento',
     ads: false,
   },
   {
     id: '3',
-    title:
-      'Researchers Unmask Sandman APT"s Hidden Link to China-Based KEYPLUG Backdoor',
-    img_url: '/imgs/2.png',
-    link: 'https://thehackernews.com/2023/12/researchers-unmask-sandman-apts-hidden.html',
+    title: '📤 Enviando formularios sem ter um Back-end de forma gratuita',
+    img_url:
+      'https://www.tabnews.com.br/api/v1/contents/iorjunior/enviando-formularios-sem-ter-um-back-end-de-forma-gratuita/thumbnail',
+    link: 'https://www.tabnews.com.br/iorjunior/enviando-formularios-sem-ter-um-back-end-de-forma-gratuita',
     ads: false,
   },
   {
     id: '4',
     title:
-      'Malware Using Google MultiLogin Exploit to Maintain Access Despite Password Reset',
-    img_url: '/imgs/4.png',
-    link: 'https://thehackernews.com/2024/01/malware-using-google-multilogin-exploit.html',
+      'Youtuber conhecido por construir microprocessadores do zero em seu laboratório caseiro vai montar fábrica de semicondutores real',
+    img_url:
+      'https://www.tabnews.com.br/api/v1/contents/NewsletterOficial/openai-esta-em-negociacoes-para-apoiar-atomic-semi-startup-que-busca-produzir-chips-acessiveis-mais-rapidamente/thumbnail',
+    link: 'https://www.tabnews.com.br/NewsletterOficial/openai-esta-em-negociacoes-para-apoiar-atomic-semi-startup-que-busca-produzir-chips-acessiveis-mais-rapidamente',
     ads: false,
   },
   {
     id: '5',
-    title: 'New Rugmi Malware Loader Surges with Hundreds of Daily Detections',
-    img_url: '/imgs/1.png',
-    link: 'https://thehackernews.com/2023/12/new-rugmi-malware-loader-surges-with.html',
+    title:
+      '🔴 Como eu CRIEI um algoritmo EFICIENTE de pesquisa de usuários com ranqueamento',
+    img_url:
+      'https://www.tabnews.com.br/api/v1/contents/tiagosavioli/como-eu-criei-um-algoritmo-eficiente-de-pesquisa-de-usuarios-com-ranquamento/thumbnail',
+    link: 'https://www.tabnews.com.br/tiagosavioli/como-eu-criei-um-algoritmo-eficiente-de-pesquisa-de-usuarios-com-ranquamento',
     ads: false,
   },
 ]

@@ -11,8 +11,7 @@ export default function ButtonsPage() {
     { text: 'News', path: '/' },
     { text: 'Recents', path: '/recents' },
     { text: 'Comments', path: '/comments' },
-    { text: 'Ask', path: '/ask' },
-    { text: 'Jobs', path: '/jobs' },
+    { text: 'Old', path: '/old' },
     { text: 'All', path: '/all' },
   ]
 

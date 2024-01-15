@@ -4,6 +4,7 @@ import { Footer, Header } from '@TabNewsUI'
 import { Analytics } from '@vercel/analytics/react'
 import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { cx } from 'react-twc'
 import './globals.css'
 
@@ -25,17 +26,19 @@ export default function RootLayout({
           GeistSans.className
         )}
       >
-        <QueryClientProvider>
-          <ThemeProvider
-            attribute="class"
-            enableColorScheme={false}
-            enableSystem
-          >
-            <Header />
-            {children} <Analytics />
-            <Footer />
-          </ThemeProvider>
-        </QueryClientProvider>
+        <Suspense fallback={null}>
+          <QueryClientProvider>
+            <ThemeProvider
+              attribute="class"
+              enableColorScheme={false}
+              enableSystem
+            >
+              <Header />
+              {children} <Analytics />
+              <Footer />
+            </ThemeProvider>
+          </QueryClientProvider>
+        </Suspense>
       </body>
     </html>
   )

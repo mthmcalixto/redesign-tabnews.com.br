@@ -17,6 +17,7 @@ export type PostsListProps = {
   tabcoins: number
   createdAt: number
   views: number
+  body: string
   comments: number
   user: UserProps
   tags: TagsProps[]

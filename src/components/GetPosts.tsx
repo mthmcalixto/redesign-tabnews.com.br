@@ -4,7 +4,6 @@ import { Button } from '@/components/Button'
 import * as S from '@/components/CardsPosts/styles'
 import { PageProps, PostsListProps } from '@/types'
 import { formatNumber } from '@/utils/formatNumber'
-import { formatTitle } from '@/utils/formatTitle'
 import { getRandomTags } from '@/utils/getRandomTags'
 import { formatCreatedAt } from '@/utils/postFormart'
 import { useInfiniteQuery } from '@tanstack/react-query'
@@ -33,6 +32,8 @@ export default function InfiniteScroll({ page, allPage, keyPage }: PageProps) {
     try {
       const response = await axios.get(API_URL, {
         params: {
+          with_children: keyPage == 'comments' || keyPage == 'all',
+          with_root: keyPage !== 'comments',
           page: pageParam,
           per_page: 15,
           strategy: page,
@@ -103,7 +104,7 @@ export default function InfiniteScroll({ page, allPage, keyPage }: PageProps) {
       views: Math.floor(Math.random() * 100001),
       comments: post.children_deep_count,
       createdAt: post.created_at,
-      tags: randomTags,
+      tags: post.title && randomTags,
       user: {
         id: post.owner_id,
         username: post.owner_username,
@@ -128,88 +129,112 @@ export default function InfiniteScroll({ page, allPage, keyPage }: PageProps) {
   // Get last post to release fetch
   const postsCount = postsWithData ? postsWithData.length : 0
 
+  const getTitle = (post: any) => {
+    const title = !post.title ? post.body : post.title
+    const type = !post.title ? 'comment' : 'post'
+
+    return { title, type }
+  }
+
   return (
     <div>
       {postsWithData && postsWithData.length > 0 && (
         <S.ListPosts>
-          {postsWithData.map((post, i) => (
-            <S.ShadowCard
-              key={`${post.id}_${i}`}
-              ref={i === postsCount - 1 ? ref : null}
-            >
-              <div className="flex gap-9 items-center justify-start">
-                <span className="text-2xl hidden md:block">{i + 1}.</span>
-                <div className="flex gap-6 justify-between w-full flex-col md:flex-row">
-                  <div className="flex flex-col gap-3 w-full md:w-1/1 justify-start">
-                    <div className="w-fit flex gap-3">
-                      <span className="text-2xl flex md:hidden">{i + 1}.</span>
-                      <Link
-                        className="grid md:truncate break-words text-xl font-medium text-ellipsis overflow-hidden hover:opacity-45 visited:text-zinc-400 dark:visited:text-[#6e7681]"
-                        href={`https://www.tabnews.com.br/${post.user.username}/${post.slug}`}
-                        rel="nofollow ugc"
-                        target="_blank"
-                        passHref
-                      >
-                        <h2
-                          className="md:truncate break-words text-ellipsis overflow-hidden items-center"
-                          title={post.title}
+          {postsWithData.map((post, i) => {
+            const postTitle = getTitle(post)
+            return (
+              <S.ShadowCard
+                key={`${post.id}_${i}`}
+                ref={i === postsCount - 1 ? ref : null}
+                $comment={!post.title && keyPage == 'all'}
+              >
+                <div className="flex gap-9 items-center justify-start">
+                  <span className="text-2xl hidden md:block">{i + 1}.</span>
+                  <div className="flex gap-6 justify-between w-full flex-col md:flex-row">
+                    <div className="flex flex-col gap-3 w-full md:w-1/1 justify-start">
+                      <div className="w-fit flex gap-3">
+                        <span className="text-2xl flex md:hidden">
+                          {i + 1}.
+                        </span>
+                        <Link
+                          className="break-words text-xl font-medium text-ellipsis overflow-hidden hover:opacity-45 visited:text-zinc-400 dark:visited:text-[#6e7681]"
+                          href={`https://www.tabnews.com.br/${post.user.username}/${post.slug}`}
+                          rel="nofollow ugc"
+                          target="_blank"
+                          passHref
                         >
-                          {formatTitle(post.title)}
-                        </h2>
-                      </Link>
-                    </div>
-                    <ul className="flex gap-5 justify-between items-start md:justify-start md:items-center flex-wrap md:flex-row">
-                      <S.Tabcoins>
-                        {post.tabcoins >= 18 ? (
-                          <S.YellowCircle />
-                        ) : post.tabcoins < 0 ? (
-                          <S.RedCircle />
-                        ) : (
-                          <S.BlueCircle />
-                        )}
-                        {post.tabcoins} tabcoins
-                      </S.Tabcoins>
-                      <S.UserIcon>
-                        <span>
-                          <LiaUserSolid size={18} />
-                        </span>
-                        {post.user.username}
-                      </S.UserIcon>
-                      <S.CommentsIcon>
-                        <span>
-                          <IoChatboxOutline size={18} />
-                        </span>
-                        {post.comments} comments
-                      </S.CommentsIcon>
-                      <S.ClockIcon>
-                        <span>
-                          <PiClockCounterClockwiseFill size={18} />
-                        </span>
-                        {formatCreatedAt(post.createdAt)}
-                      </S.ClockIcon>
-                      <S.EyeIcon>
-                        <span>
-                          <RxEyeOpen size={18} />
-                        </span>
-                        {formatNumber(post.views)}
-                      </S.EyeIcon>
-                    </ul>
-                    <S.TagsContainer>
-                      <ul className="flex gap-2 flex-wrap md:flex-row">
-                        {post.tags.map((x: any, _: any) => {
-                          return (
-                            <Button $intent="tags" key={x.id}>
-                              {x.name}
-                            </Button>
-                          )
-                        })}
+                          <h2
+                            className="flex gap-2 justify-center items-baseline"
+                            title={postTitle.title}
+                          >
+                            {postTitle.type === 'comment' ? (
+                              <>
+                                <span>
+                                  <IoChatboxOutline size={20} />
+                                </span>
+                                {postTitle.title}
+                              </>
+                            ) : (
+                              postTitle.title
+                            )}
+                          </h2>
+                        </Link>
+                      </div>
+                      <ul className="flex gap-5 justify-between items-start md:justify-start md:items-center flex-wrap md:flex-row">
+                        <S.Tabcoins>
+                          {post.tabcoins >= 18 ? (
+                            <S.YellowCircle />
+                          ) : post.tabcoins < 0 ? (
+                            <S.RedCircle />
+                          ) : (
+                            <S.BlueCircle />
+                          )}
+                          {post.tabcoins} tabcoins
+                        </S.Tabcoins>
+                        <S.UserIcon>
+                          <span>
+                            <LiaUserSolid size={18} />
+                          </span>
+                          {post.user.username}
+                        </S.UserIcon>
+                        <S.CommentsIcon>
+                          <span>
+                            <IoChatboxOutline size={18} />
+                          </span>
+                          {post.comments} comments
+                        </S.CommentsIcon>
+                        <S.ClockIcon>
+                          <span>
+                            <PiClockCounterClockwiseFill size={18} />
+                          </span>
+                          {formatCreatedAt(post.createdAt)}
+                        </S.ClockIcon>
+                        <S.EyeIcon>
+                          <span>
+                            <RxEyeOpen size={18} />
+                          </span>
+                          {formatNumber(post.views)}
+                        </S.EyeIcon>
                       </ul>
-                    </S.TagsContainer>
+                      {post.title && (
+                        <S.TagsContainer>
+                          <ul className="flex gap-2 flex-wrap md:flex-row">
+                            {post.tags.map((x: any, _: any) => {
+                              return (
+                                <Button $intent="tags" key={x.id}>
+                                  {x.name}
+                                </Button>
+                              )
+                            })}
+                          </ul>
+                        </S.TagsContainer>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </S.ShadowCard>
-          ))}
+              </S.ShadowCard>
+            )
+          })}
         </S.ListPosts>
       )}
       <div>

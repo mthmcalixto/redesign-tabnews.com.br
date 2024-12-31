@@ -13,9 +13,9 @@ export default function Footer() {
             <span>
               <LogoFooter width={30} height={30} />
             </span>
-            © {new Date().getFullYear()} TabNews - Unofficial Redesign
+            © 2024-{new Date().getFullYear()} TabNews - Unofficial Redesign
           </S.LogoContainer>
-          <div className="flex flex-row gap-2 justify-between">
+          <div className="flex flex-wrap gap-12 justify-center items-center">
             <S.UlContainer>
               <li>Contact</li>
               <li>GitHub</li>

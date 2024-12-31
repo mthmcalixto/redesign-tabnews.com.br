@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { BiSearch } from 'react-icons/bi'
 import { FiMenu } from 'react-icons/fi'
 import { Button } from '../Button'
-import ThemeToggle from '../ThemeToggle'
 import * as S from './styles'
 
 export default function Header() {
@@ -13,8 +12,12 @@ export default function Header() {
         <S.HeaderWrapper>
           <S.HeaderLeft>
             <S.LogoRoot>
-              <Link href="/" className="hover:opacity-45" passHref>
-                <Logo color="#fff" width={144.214} height={28.583} />
+              <Link
+                href="/"
+                className="hover:opacity-45 flex gap-2 items-center justify-center font-semibold text-xl text-white dark:text-white"
+              >
+                <Logo color="#fff" className="w-8 h-8 md:w-11 md:h-11" />
+                TabNews
               </Link>
               <BiSearch size={27} color="#C9D1D9" />
             </S.LogoRoot>
@@ -32,12 +35,11 @@ export default function Header() {
                 <Button $intent="no_style">Login</Button>
                 <Button>Sing Up</Button>
                 <div className="ml-4">
-                  <FiMenu color="#fff" size={42} />
+                  <FiMenu color="#fff" className="text-2xl md:text-4xl" />
                 </div>
               </div>
               <div className="flex md:hidden items-center">
-                <ThemeToggle />
-                <FiMenu color="#fff" size={42} />
+                <FiMenu color="#fff" className="text-2xl md:text-4xl" />
               </div>
             </div>
           </S.HeaderRight>

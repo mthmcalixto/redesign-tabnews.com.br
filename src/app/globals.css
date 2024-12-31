@@ -12,6 +12,14 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+html {
+  @apply h-full overflow-x-hidden;
+}
+
+body {
+  @apply scroll-smooth antialiased font-body;
+}
+
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {

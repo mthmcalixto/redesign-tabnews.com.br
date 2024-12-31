@@ -3,16 +3,18 @@ import { Button } from '@TabNewsUI'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 
-export default function ButtonsPage() {
+export default async function ButtonsPage() {
   const headersList = headers()
-  const header_url = headersList.get('x-pathname') || ''
+  const header_url = (await headersList).get('x-pathname') || ''
+
+  console.log(header_url)
 
   const buttonsData = [
     { text: 'News', path: '/' },
-    { text: 'Recents', path: '/recents' },
-    { text: 'Comments', path: '/comments' },
-    { text: 'Old', path: '/old' },
-    { text: 'All', path: '/all' },
+    { text: 'Recents', path: '/page/recents' },
+    { text: 'Comments', path: '/page/comments' },
+    { text: 'Old', path: '/page/old' },
+    { text: 'All', path: '/page/all' },
   ]
 
   return (
@@ -22,7 +24,7 @@ export default function ButtonsPage() {
       </div>
       <S.ListButtons>
         {buttonsData.map(({ text, path }) => (
-          <Link key={path} href={path} passHref scroll={false}>
+          <Link key={path} href={path} scroll={false}>
             <Button $intent={header_url === path ? 'clips_active' : 'clips'}>
               {text}
             </Button>

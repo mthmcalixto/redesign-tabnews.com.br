@@ -95,7 +95,13 @@ export default function InfiniteScroll({
   const postsWithData = posts.map((post) => ({
     ...post,
     views: post.views ? post.views : 1000000,
-    tags: post.tags ? post.tags : [{ id: '1', name: 'javascript' }],
+    tags: post.tags
+      ? post.tags
+      : [
+          { id: '1', name: 'javascript' },
+          { id: '2', name: 'tabnews' },
+          { id: '3', name: 'python' },
+        ],
     comments: post.children_deep_count,
     createdAt: post.created_at as string | number,
     user: {
@@ -224,7 +230,7 @@ export default function InfiniteScroll({
                       {post.title && (
                         <S.TagsContainer>
                           <ul className="flex gap-2 pb-2 flex-wrap md:flex-row">
-                            {post.tags.map((x: any, _: any) => {
+                            {post.tags.slice(0, 3).map((x: any, _: any) => {
                               return (
                                 <Button $intent="tags" key={x.id}>
                                   {x.name}

@@ -20,8 +20,8 @@ export default function CardsTrending() {
   >('isBeginning')
 
   const breakPoints = {
-    300: { slidesPerView: 1 },
-    640: { slidesPerView: 2 },
+    300: { slidesPerView: 1, spaceBetween: 12 },
+    640: { slidesPerView: 2, spaceBetween: 12 },
     768: { slidesPerView: 3 },
     1200: { slidesPerView: 4 },
   }

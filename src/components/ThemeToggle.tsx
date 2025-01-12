@@ -44,8 +44,7 @@ function ThemeToggle() {
 
         <div
           className={`${
-            isSystemTheme === 'system' &&
-            'bg-zinc-200/[0.6] dark:bg-zinc-200/[0.6]'
+            isSystemTheme === 'system' && 'bg-zinc-200/[0.6] dark:bg-zinc-700'
           } p-2.5  hover:bg-zinc-100 rounded-full hover:cursor-pointer dark:hover:bg-zinc-800`}
           onClick={() => applyTheme('system')}
           aria-label="System Theme Mode"
